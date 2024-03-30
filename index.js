@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname)))
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/ResumeUploader')
  
 app.set("view engine","ejs")
 app.set("views",path.resolve("./views"))
