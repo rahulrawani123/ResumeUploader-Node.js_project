@@ -1,10 +1,12 @@
 const Resumedata = require('../models/models');
+const mongoose = require('mongoose');
 
 async function homeget(req,res){
     return res.render("home")
 }
 
 async function homepost(req,res){
+    await connect()
     const newUser = new Resumedata({
         Name:req.body.Name,
         Gender:req.body.Gender,
@@ -28,16 +30,21 @@ async function homepost(req,res){
 }
 
 async function listget(req,res){
+    await connect()
     const candidates = await Resumedata.find({})
     return res.render("lists",{items:candidates})
 }
 
 async function detailsget(req,res){
+    await connect()
     const details = await Resumedata.findOne({Name:req.params.name})
     return res.render("details",{items:details})
 }
 
-
+async function connect(){
+    await mongoose.connect('mongodb+srv://rawanirahul93:salman123@resume.uumgzlw.mongodb.net/resumedata?retryWrites=true&w=majority&appName=Resume',);
+    console.log("connected succesfully")
+} 
 
 
 
@@ -48,4 +55,5 @@ module.exports={
     homepost,
     listget,
     detailsget,
+    connect,
 }
