@@ -15,9 +15,9 @@ const storage = multer.diskStorage({
 const upload = multer({storage:storage})
 
 
-router.get("/home",homeget)
+router.get("/",homeget)
 
-router.post("/home",upload.single("image"),homepost)
+router.post("/",upload.single("image"),homepost)
 
 router.get("/list",listget)
 
